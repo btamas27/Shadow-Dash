@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance{ get; set; }
 
     #region FIELDS
+
     public GameObject character;
+
+    public SoundClip deathSound;
     #endregion
 
     #region PROPERTIES
@@ -39,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("WTF");
         StartCoroutine(YStartGame());
     }
 
@@ -50,6 +54,8 @@ public class GameManager : MonoBehaviour
         ObstaclePool.Instance.StartPool();
         character.transform.position = new Vector2(0, -3.5f);
         character.gameObject.SetActive(true);
+        character.transform.GetChild(0).gameObject.SetActive(true);
+        character.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
     }
 
     #endregion

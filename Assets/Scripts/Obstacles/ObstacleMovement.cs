@@ -14,6 +14,16 @@ public class ObstacleMovement : MonoBehaviour
 
     #region METHODS
 
+    private void Start()
+    {
+        EventManager.Instance.OnDeath += HandleDeath;
+    }
+
+    void HandleDeath()
+    {
+        StopAllCoroutines();
+    }
+
     private void OnEnable()
     {
         transform.position = new Vector3(Random.Range(-2.3f, 2.3f), 5.5f, 0);

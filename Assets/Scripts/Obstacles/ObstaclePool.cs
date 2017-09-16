@@ -45,6 +45,10 @@ public class ObstaclePool : MonoBehaviour {
         }
         data.gameObject.SetActive(false);
         music.gameObject.SetActive(false);
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
         StopAllCoroutines();
     }
 

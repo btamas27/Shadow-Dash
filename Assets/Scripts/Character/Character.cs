@@ -13,7 +13,6 @@ public class Character : MonoBehaviour
     Vector3 lastPosition;
 
     #region PROPERTIES
-
     public float MinPositionX
     {
         get
@@ -54,7 +53,6 @@ public class Character : MonoBehaviour
             transform.position = value;
         }
     }
-
     #endregion
 
     void Start()
@@ -64,12 +62,15 @@ public class Character : MonoBehaviour
 
     private IEnumerator Die()
     {
+        SoundManager.Instance.Play(GameManager.Instance.deathSound.sound, transform.parent.parent.parent, transform.position, GameManager.Instance.deathSound.volume, 0, false);
+        if (EventManager.Instance.OnDeath != null)
+        {
+            EventManager.Instance.OnDeath();
+        }
         GameManager.Instance.IsPlaying = false;
         GameManager.Instance.TriggerChangeScreen(UIScreen.Type.GameOver);
 
         transform.GetChild(0).gameObject.SetActive(false);
-        StopTrailParticle();
-        StopTapPartice();
         yield return new WaitForSeconds(.4f);
         gameObject.SetActive(false);
     }
@@ -89,9 +90,9 @@ public class Character : MonoBehaviour
                     Debug.Log(GameManager.Instance.Score);
                 }
                 break;
+               
         }
     }
-
     public void PlayTapPaticle()
     {
         tapParticle.transform.position = CurrentPosition;

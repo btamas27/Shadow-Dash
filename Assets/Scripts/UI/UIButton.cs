@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class UIButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    public Action OnClick;
+    public Action OnClickUp;
+    public Action<UIButton.Type> OnClickThis;
+
     public enum Type
     {
         Play,
@@ -17,21 +21,21 @@ public class UIButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (EventManager.Instance.OnClick != null)
+        if (OnClick != null)
         {
-            EventManager.Instance.OnClick();
+            OnClick();
         }
-        if (EventManager.Instance.OnClickThis != null)
+        if (OnClickThis != null)
         {
-            EventManager.Instance.OnClickThis(type);
+            OnClickThis(type);
         }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (EventManager.Instance.OnClickUp != null)
+        if (OnClickUp != null)
         {
-            EventManager.Instance.OnClickUp();
+            OnClickUp();
         }
 
     }

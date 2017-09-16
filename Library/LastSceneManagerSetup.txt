@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Test_Tomi - Shadow Dash.unity
+- path: Assets/Scenes/MainGame - Shadow Dash.unity
   isLoaded: 1
   isActive: 1

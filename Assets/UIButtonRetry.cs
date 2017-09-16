@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIButtonPlay : UIButton
+public class UIButtonRetry : UIButton
 {
-
+    
     void Start()
     {
-        base.OnClick += HandleClick;		
+        base.OnClick += HandleClick;
     }
 
-	
     void HandleClick()
     {
-        GameManager.Instance.StartGame();
+        GameManager.Instance.TriggerChangeScreen(UIScreen.Type.Main);
     }
 }
