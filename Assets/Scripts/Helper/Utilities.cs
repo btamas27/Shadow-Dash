@@ -27,14 +27,21 @@ public class Utilities
         }
     }
 
-    public static int CheckIfOutOfScreen(GameObject obj)
+    public static int CheckIfOutOfScreen(GameObject obj, GameObject parent = null)
     {
         float halfSize = GetHalfSizeOfObject(obj);
-        if (obj.transform.position.x > (ScreenSize.x - halfSize))
+
+        Transform compareTo = obj.transform;
+        if (parent != null)
+        {
+            compareTo = parent.transform;
+        }
+
+        if (compareTo.position.x > (ScreenSize.x - halfSize))
         {
             return (int)SIDE.LEFT;
         }
-        else if (obj.transform.position.x < (halfSize - ScreenSize.x))
+        else if (compareTo.position.x < (halfSize - ScreenSize.x))
         {
             return (int)SIDE.RIGHT;
         }

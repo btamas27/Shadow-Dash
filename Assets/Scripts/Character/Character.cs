@@ -6,18 +6,24 @@ public class Character : MonoBehaviour
 {
     public static float positionY = -3.5f;
 
+    [SerializeField]
+    bool dontDIE;
+
     public iTween.EaseType movement = iTween.EaseType.easeOutCubic;
     public iTween.EaseType putBackMovement = iTween.EaseType.easeOutExpo;
     public ParticleController tapParticle;
     public ParticleController trailParticle;
-    Vector3 lastPosition;
+
+    private Vector3 lastPosition;
+    private SpriteRenderer sprite;
 
     #region PROPERTIES
+
     public float MinPositionX
     {
         get
         {
-            return Utilities.ScreenSize.x - Utilities.GetHalfSizeOfObject(gameObject);
+            return Utilities.ScreenSize.x - Utilities.GetHalfSizeOfObject(Sprite.gameObject);
         }
     }
 
@@ -25,7 +31,7 @@ public class Character : MonoBehaviour
     {
         get
         {
-            return Utilities.GetHalfSizeOfObject(gameObject) - Utilities.ScreenSize.x;
+            return Utilities.GetHalfSizeOfObject(Sprite.gameObject) - Utilities.ScreenSize.x;
         }
     }
 
@@ -53,6 +59,19 @@ public class Character : MonoBehaviour
             transform.position = value;
         }
     }
+
+    public SpriteRenderer Sprite
+    {
+        get
+        {
+            if (sprite == null)
+            {
+                sprite = GetComponentInChildren<SpriteRenderer>();
+            }
+            return sprite;
+        }
+    }
+
     #endregion
 
     void Start()
@@ -85,7 +104,8 @@ public class Character : MonoBehaviour
         {
             case "Obstacle":
                 {
-                    StartCoroutine(Die());
+                    if (!dontDIE)
+                        StartCoroutine(Die());
                 }
                 break; 
             case "ScoreTrigger":
@@ -98,6 +118,7 @@ public class Character : MonoBehaviour
                
         }
     }
+
     public void PlayTapPaticle()
     {
         tapParticle.transform.position = CurrentPosition;
