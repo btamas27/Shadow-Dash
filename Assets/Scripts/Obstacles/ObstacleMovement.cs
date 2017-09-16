@@ -26,7 +26,17 @@ public class ObstacleMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.position = new Vector3(Random.Range(-2.3f, 2.3f), 5.5f, 0);
+        float tempX;
+        if (GameManager.Instance.LastXPos > 0)
+        {
+            tempX = Random.Range(-2.3f, 0f);
+        }
+        else
+        {
+            tempX = Random.Range(0f, 2.3f);
+        }
+        GameManager.Instance.LastXPos = tempX;
+        transform.position = new Vector3(tempX, 5.5f, 0);
         StartCoroutine(YMove());
     }
 
@@ -34,6 +44,13 @@ public class ObstacleMovement : MonoBehaviour
     {
         while (transform.position.y > -6f)
         {
+            if (ObstaclePool.Instance.data.dbValue > 0)
+            {
+                transform.GetChild(0).localScale = new Vector3(16.94f, Mathf.Clamp(transform.localScale.y * ObstaclePool.Instance.data.dbValue / 10, 1, 3f), 0);
+                transform.GetChild(1).localScale = new Vector3(16.94f, Mathf.Clamp(transform.localScale.y * ObstaclePool.Instance.data.dbValue / 10, 1, 3f), 0);
+//                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * ObstaclePool.Instance.data.pitchValue / 100, 0);
+//                transform.localScale = new Vector3(transform.localScale.x, Mathf.Clamp(transform.localScale.y * ObstaclePool.Instance.data.dbValue / 10, 1, 3f), 0);
+            }
             transform.Translate(new Vector3(0, speed, 0));
             yield return null;
         }

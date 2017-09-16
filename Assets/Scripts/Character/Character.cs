@@ -110,7 +110,12 @@ public class Character : MonoBehaviour
                 break; 
             case "ScoreTrigger":
                 {
-                    StartCoroutine(Shake(.7f, .05f));
+                    GetComponentInChildren<Animator>().Play("CharacterBurst");
+                    StartCoroutine(Shake(.7f, .1f));
+                    if (EventManager.Instance.OnScoreIncreased != null)
+                    {
+                        EventManager.Instance.OnScoreIncreased();
+                    }
                     GameManager.Instance.Score++;
                     Debug.Log(GameManager.Instance.Score);
                 }

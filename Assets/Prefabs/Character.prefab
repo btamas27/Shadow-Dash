@@ -224,7 +224,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1801934145925922}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -15.27, z: 0}
+  m_LocalPosition: {x: 0, y: -1.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4656029659885362}
@@ -350,7 +350,6 @@ MonoBehaviour:
   putBackMovement: 16
   tapParticle: {fileID: 114582497072844768}
   trailParticle: {fileID: 114679871527922916}
-  destroyParticle: {fileID: 0}
 --- !u!114 &114582497072844768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -517,7 +516,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1630133686
+  randomSeed: 263035251
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3559,7 +3558,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1487956160
+  randomSeed: 2091697387
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6601,7 +6600,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1803598358
+  randomSeed: 896785150
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6949,7 +6948,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 30
+    maxNumParticles: 1000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -7110,7 +7109,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 200
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -10032,7 +10031,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 50
+    maxNumParticles: 1000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -10193,7 +10192,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 200
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -10275,7 +10274,7 @@ ParticleSystem:
     m_BurstCount: 1
     m_Bursts:
     - time: 0
-      minCount: 0
+      minCount: 20
       maxCount: 50
       cycleCount: 1
       repeatInterval: 0.01
@@ -12947,7 +12946,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 62e763683953e114bbef4ac277f7d268, type: 3}
-  m_Color: {r: 0.42171282, g: 0.5580183, b: 0.9558824, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

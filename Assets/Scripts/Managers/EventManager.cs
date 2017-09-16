@@ -10,6 +10,7 @@ public class EventManager : MonoBehaviour
     public Action<UIScreen.Type> OnChangeScreen;
     public Action OnClickDown;
     public Action OnDeath;
+    public Action OnScoreIncreased;
 
     private void Awake()
     {

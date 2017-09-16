@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public bool IsPlaying{ get; set; }
 
+    public float LastXPos{ get; set; }
+
     #endregion
 
     #region METHODS
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator YStartGame()
     {
+        Score = 0;
         TriggerChangeScreen(UIScreen.Type.InGame);
         yield return new WaitForSeconds(.4f);
         IsPlaying = true;
