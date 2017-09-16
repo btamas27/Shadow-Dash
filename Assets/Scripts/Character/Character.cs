@@ -62,6 +62,7 @@ public class Character : MonoBehaviour
 
     private IEnumerator Die()
     {
+        StartCoroutine(Shake(.7f, .05f));
         SoundManager.Instance.Play(GameManager.Instance.deathSound.sound, transform.parent.parent.parent, transform.position, GameManager.Instance.deathSound.volume, 0, false);
         if (EventManager.Instance.OnDeath != null)
         {
@@ -71,6 +72,9 @@ public class Character : MonoBehaviour
         GameManager.Instance.TriggerChangeScreen(UIScreen.Type.GameOver);
 
         transform.GetChild(0).gameObject.SetActive(false);
+        Time.timeScale = .5f;
+        yield return new WaitForSeconds(.5f);
+        Time.timeScale = 1f;
         yield return new WaitForSeconds(.4f);
         gameObject.SetActive(false);
     }
@@ -86,6 +90,7 @@ public class Character : MonoBehaviour
                 break; 
             case "ScoreTrigger":
                 {
+                    StartCoroutine(Shake(.7f, .05f));
                     GameManager.Instance.Score++;
                     Debug.Log(GameManager.Instance.Score);
                 }
@@ -112,5 +117,35 @@ public class Character : MonoBehaviour
     public void StopTrailParticle()
     {
         trailParticle.Stop();
+    }
+
+    private IEnumerator Shake(float duration, float magnitude)
+    {
+
+        float elapsed = 0.0f;
+        Vector3 originalCamPos = Camera.main.transform.position;
+
+
+        while (elapsed < duration)
+        {
+
+            elapsed += Time.deltaTime;          
+
+            float percentComplete = elapsed / duration;         
+            float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
+
+            // map value to [-1, 1]
+            float x = Random.value * 2.0f - 1.0f;
+            float y = Random.value * 2.0f - 1.0f;
+
+            x *= magnitude * damper;
+            y *= magnitude * damper;
+
+            Camera.main.transform.position = new Vector3(originalCamPos.x + x, originalCamPos.y + y, originalCamPos.z);
+
+            yield return null;
+        }
+
+        Camera.main.transform.position = originalCamPos;
     }
 }
