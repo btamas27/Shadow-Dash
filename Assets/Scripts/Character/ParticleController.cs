@@ -7,6 +7,14 @@ public class ParticleController : MonoBehaviour
     public bool debug;
     ParticleSystem particle;
 
+    public ParticleSystem Particle
+    {
+        get
+        {
+            return particle;
+        }
+    }
+
     void Start()
     {
         particle = GetComponent<ParticleSystem>();

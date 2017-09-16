@@ -39,6 +39,8 @@ public class CharController : MonoBehaviour
 
     void HandleClickDown()
     {
+        float diffrence = transform.position.x - Utilities.MousePositionInWorldUnit.x;
+        Debug.Log("ASD");
         iTween.MoveTo(Character.gameObject, iTween.Hash(
                 "position", Utilities.MousePositionInWorldUnit, 
                 "easetype", Character.movement, 
@@ -46,6 +48,7 @@ public class CharController : MonoBehaviour
                 "oncomplete", "PutBackIfNeeded", "onCompleteTarget", gameObject, 
                 "onupdate", "PlayTapPaticle", "onUpdateTarget", Character.gameObject)
         );
+//        iTween.RotateBy(Character.gameObject, diffrence < 0 ? new Vector3(0, 0, 60) : new Vector3(0, 0, -60), .7f);
     }
 
     void PutBackIfNeeded()

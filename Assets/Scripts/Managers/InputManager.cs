@@ -9,6 +9,9 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (!GameManager.Instance.IsPlaying)
+                return;
+
             if (EventManager.Instance.OnClickDown != null)
             {
                 EventManager.Instance.OnClickDown();

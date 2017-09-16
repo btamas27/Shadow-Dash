@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        IsPlaying = true;
+//        IsPlaying = true;
     }
 
     public void TriggerChangeScreen(UIScreen.Type type)
@@ -48,9 +48,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator YStartGame()
     {
-        IsPlaying = true;
         TriggerChangeScreen(UIScreen.Type.InGame);
         yield return new WaitForSeconds(.4f);
+        IsPlaying = true;
         ObstaclePool.Instance.StartPool();
         character.transform.position = new Vector2(0, -3.5f);
         character.gameObject.SetActive(true);
