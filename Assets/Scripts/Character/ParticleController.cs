@@ -40,9 +40,4 @@ public class ParticleController : MonoBehaviour
         forceOverLiftime.y = force.y;
     }
 
-    void Update()
-    {
-        if (debug)
-            Debug.Log(string.Format("{0} is playing:[{1}]", name, particle.isPlaying));
-    }
 }

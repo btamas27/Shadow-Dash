@@ -26,6 +26,7 @@ public class ObstacleMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        timer = 0;
         float tempX;
         if (GameManager.Instance.LastXPos > 0)
         {
@@ -44,6 +45,7 @@ public class ObstacleMovement : MonoBehaviour
     {
         while (transform.position.y > -6f)
         {
+            timer += Time.deltaTime;
             if (ObstaclePool.Instance.data.dbValue > 0)
             {
                 transform.GetChild(0).localScale = new Vector3(16.94f, Mathf.Clamp(transform.localScale.y * ObstaclePool.Instance.data.dbValue / 10, 1, 3f), 0);
@@ -55,6 +57,14 @@ public class ObstacleMovement : MonoBehaviour
             yield return null;
         }
         gameObject.SetActive(false);
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "Player")
+        {
+            Debug.Log(timer);
+        }
     }
 
     private void OnDisable()

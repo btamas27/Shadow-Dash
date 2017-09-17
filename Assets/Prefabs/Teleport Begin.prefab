@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4786131797089972}
   - component: {fileID: 198773632673210554}
   - component: {fileID: 199108285744433544}
+  - component: {fileID: 114962653811342510}
   m_Layer: 0
   m_Name: Teleport Begin
   m_TagString: Untagged
@@ -72,6 +73,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114962653811342510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1673810238331398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2e8874f60266498a388d7229a1bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnlyDeactivate: 0
 --- !u!198 &198376971496562744
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -507,7 +520,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3612,7 +3625,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 5
       minScalar: 0
       maxCurve:
         serializedVersion: 2

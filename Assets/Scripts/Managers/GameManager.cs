@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject character;
 
     public SoundClip deathSound;
+    public SoundClip buttonClick;
 
     public SoundClip[] dashSounds;
     #endregion
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     public bool IsPlaying{ get; set; }
 
     public float LastXPos{ get; set; }
+
+    public bool IsTeleportOn { get; set; }
 
     #endregion
 
@@ -52,15 +55,33 @@ public class GameManager : MonoBehaviour
 
     IEnumerator YStartGame()
     {
+        IsTeleportOn = false;
         Score = 0;
         TriggerChangeScreen(UIScreen.Type.InGame);
         yield return new WaitForSeconds(.4f);
         IsPlaying = true;
         ObstaclePool.Instance.StartPool();
-        character.transform.position = new Vector2(0, -3.5f);
+        character.transform.position = new Vector3(0, -3.5f, 0);
         character.gameObject.SetActive(true);
         character.transform.GetChild(0).gameObject.SetActive(true);
         character.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+    }
+
+    private IEnumerator YTeleportTimer()
+    {
+        float time = 5f;
+
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        IsTeleportOn = false;
+    }
+
+    public void CallTeleportCounter()
+    {
+        StartCoroutine(YTeleportTimer());
     }
 
     #endregion

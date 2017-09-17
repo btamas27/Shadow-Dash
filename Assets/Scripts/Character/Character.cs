@@ -113,13 +113,13 @@ public class Character : MonoBehaviour
             case "ScoreTrigger":
                 {
                     GetComponentInChildren<Animator>().Play("CharacterBurst");
-                    StartCoroutine(Shake(.7f, .1f));
+                    StartCoroutine(Shake(1f, .1f));
+                    GameManager.Instance.Score++;
                     if (EventManager.Instance.OnScoreIncreased != null)
                     {
                         EventManager.Instance.OnScoreIncreased();
                     }
-                    GameManager.Instance.Score++;
-                    Debug.Log(GameManager.Instance.Score);
+//                    Debug.Log(GameManager.Instance.Score);
                 }
                 break;
                

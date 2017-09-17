@@ -25,7 +25,7 @@ public class ObstaclePool : MonoBehaviour {
     {
         while (GameManager.Instance.IsPlaying)
         {
-            if (data.dbValue > 10 || data.dbValue < 5)
+            if (data.dbValue > 8)
             {
                 for (int i = 0; i < transform.childCount; i++)
                 {
@@ -54,7 +54,8 @@ public class ObstaclePool : MonoBehaviour {
 
     private IEnumerator YStartMusic()
     {
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.28f);
         music.gameObject.SetActive(true);
+//        yield return null;
     }
 }

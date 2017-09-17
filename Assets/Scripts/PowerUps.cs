@@ -4,46 +4,48 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace Dollhouse.Custom.Apartment
+public class PowerUps : MonoBehaviour
 {
-    public class PowerUps : MonoBehaviour
+    [Header("The Player")]
+    public GameObject player;
+
+    [Header("Time Scales")]
+    public float slowTimeScale;
+    public float fastTimeScale;
+
+    [Header("Transform Scales")]
+    public float shrinkScaleX;
+    public float shrinkScaleY;
+    public float growScaleX;
+    public float growScaleY;
+
+
+    public enum Type
     {
-        [Header("The Player")]
-        public GameObject player;
+        Invulnerability,
+        Teleportation,
+        SlowTime,
+        Shrink,
+        XRay,
+        FastTime,
+        Grow,
+        Blind,
+        Reverse,
+        Sticky}
 
-        [Header("Time Scales")]
-        public float slowTimeScale;
-        public float fastTimeScale;
+    ;
 
-        [Header("Transform Scales")]
-        public float shrinkScaleX;
-        public float shrinkScaleY;
-        public float growScaleX;
-        public float growScaleY;
+    public Type type;
 
+    // Use this for initialization
+    void Start()
+    {
 
-        public enum Type
-        {
-            Invulnerability,
-            Teleportation,
-            SlowTime,
-            Shrink,
-            XRay,
-            FastTime,
-            Grow,
-            Blind,
-            Reverse,
-            Sticky
-        };
-        public Type type;
+    }
 
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
         {
             switch (type)
             {
@@ -51,7 +53,10 @@ namespace Dollhouse.Custom.Apartment
 
                     break;
                 case Type.Teleportation:
-
+                    GameManager.Instance.IsTeleportOn = true;
+                    GameManager.Instance.CallTeleportCounter();
+//                    gameObject.SetActive(false);
+                    Destroy(gameObject);
                     break;
                 case Type.SlowTime:
                     Time.timeScale = slowTimeScale;
@@ -81,7 +86,7 @@ namespace Dollhouse.Custom.Apartment
 
                     break;
             }
-
         }
+
     }
 }

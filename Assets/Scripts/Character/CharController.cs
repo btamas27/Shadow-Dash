@@ -9,13 +9,16 @@ public class CharController : MonoBehaviour
     [SerializeField]
     Character character;
 
+    public ParticleSystem teleportStart;
+    public ParticleSystem teleportFinish;
+
     public Character Character
     {
         get
         {
             if (character == null)
             {
-                character = GetComponentInChildren<Character>();
+                character = GetComponentInChildren<Character>(true);
             }
             return character;
         }
@@ -39,15 +42,34 @@ public class CharController : MonoBehaviour
 
     void HandleClickDown()
     {
-        SoundManager.Instance.Play(GameManager.Instance.dashSounds[Random.Range(0, 3)].sound, transform.parent.parent, transform.position);
-        iTween.MoveTo(Character.gameObject, iTween.Hash(
-                "position", Utilities.MousePositionInWorldUnit, 
-                "easetype", Character.movement, 
-                "time", .7f, 
-                "onstart", "Rotate", "onStartTarget", gameObject,
-                "oncomplete", "PutBackIfNeeded", "onCompleteTarget", gameObject, 
-                "onupdate", "PlayTapPaticle", "onUpdateTarget", Character.gameObject)
-        );
+        int temp = Random.Range(0, 3);
+        SoundManager.Instance.Play(GameManager.Instance.dashSounds[temp].sound, transform.parent.parent, transform.position,GameManager.Instance.dashSounds[temp].volume);
+        if (GameManager.Instance.IsTeleportOn)
+        {
+            StartCoroutine(YTeleport());
+        }
+        else
+        {
+            iTween.MoveTo(Character.gameObject, iTween.Hash(
+                    "position", Utilities.MousePositionInWorldUnit, 
+                    "easetype", Character.movement, 
+                    "time", .5f, 
+                    "onstart", "Rotate", "onStartTarget", gameObject,
+                    "oncomplete", "PutBackIfNeeded", "onCompleteTarget", gameObject, 
+                    "onupdate", "PlayTapPaticle", "onUpdateTarget", Character.gameObject)
+            );
+        }
+    }
+
+    private IEnumerator YTeleport()
+    {
+        Instantiate(teleportStart, Character.transform.position, Quaternion.identity, transform);
+        character.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        yield return new WaitForSeconds(.2f);
+        Character.transform.position = Utilities.MousePositionInWorldUnit;
+        character.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+        Instantiate(teleportFinish, Character.transform.position, Quaternion.identity, transform);
+        
     }
 
     void PutBackIfNeeded()

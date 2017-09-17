@@ -21,6 +21,7 @@ public class UIButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        SoundManager.Instance.Play(GameManager.Instance.buttonClick.sound, transform.parent.parent, transform.position,GameManager.Instance.buttonClick.volume);
         if (OnClick != null)
         {
             OnClick();
