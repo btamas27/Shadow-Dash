@@ -36,19 +36,6 @@ public class Character : MonoBehaviour
         }
     }
 
-    public Vector3 LastPosition
-    {
-        get
-        {
-            
-            return lastPosition;
-        }
-        set
-        {
-            lastPosition = value;
-        }
-    }
-
     public Vector3 CurrentPosition
     {
         get
@@ -82,7 +69,7 @@ public class Character : MonoBehaviour
 
     private IEnumerator Die()
     {
-        MenuMusic.Instance.CallFadeOut(GetComponent<AudioSource>());
+        MenuMusic.Instance.CallFadeOut(ingameMusic);
         StartCoroutine(Shake(.7f, .05f));
         SoundManager.Instance.Play(GameManager.Instance.deathSound.sound, transform.parent.parent.parent, transform.position, GameManager.Instance.deathSound.volume, 0, false);
         if (EventManager.Instance.OnDeath != null)
@@ -97,6 +84,7 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         Time.timeScale = 1f;
         yield return new WaitForSeconds(.4f);
+//        transform.parent.position = new Vector3(0, -15, 0);
         gameObject.SetActive(false);
     }
 
@@ -113,7 +101,7 @@ public class Character : MonoBehaviour
             case "ScoreTrigger":
                 {
                     GetComponentInChildren<Animator>().Play("CharacterBurst");
-                    StartCoroutine(Shake(1f, .1f));
+                    StartCoroutine(Shake(.7f, .08f));
                     GameManager.Instance.Score++;
                     if (EventManager.Instance.OnScoreIncreased != null)
                     {
