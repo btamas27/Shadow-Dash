@@ -39,6 +39,7 @@ public class CharController : MonoBehaviour
 
     void HandleClickDown()
     {
+        SoundManager.Instance.Play(GameManager.Instance.dashSounds[Random.Range(0, 3)].sound, transform.parent.parent, transform.position);
         iTween.MoveTo(Character.gameObject, iTween.Hash(
                 "position", Utilities.MousePositionInWorldUnit, 
                 "easetype", Character.movement, 

@@ -8,11 +8,11 @@ public class ScoreCounter : MonoBehaviour
 
     private Text scoreText;
 
-    void Start()
+    void OnEnable()
     {
         EventManager.Instance.OnScoreIncreased += HandleScoreIncrease;
         scoreText = GetComponentInChildren<Text>();
-        scoreText.text = GameManager.Instance.Score + "";
+        scoreText.text = 0 + "";
     }
 
     void HandleScoreIncrease()
@@ -21,4 +21,8 @@ public class ScoreCounter : MonoBehaviour
         GetComponent<Animator>().Play("ScoreBump");
     }
 	
+    void OnDisable()
+    {
+        EventManager.Instance.OnScoreIncreased -= HandleScoreIncrease;
+    }
 }

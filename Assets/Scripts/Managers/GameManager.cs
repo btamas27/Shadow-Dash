@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject character;
 
     public SoundClip deathSound;
+
+    public SoundClip[] dashSounds;
     #endregion
 
     #region PROPERTIES

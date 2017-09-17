@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     public iTween.EaseType putBackMovement = iTween.EaseType.easeOutExpo;
     public ParticleController tapParticle;
     public ParticleController trailParticle;
+    public AudioSource ingameMusic;
 
     private Vector3 lastPosition;
     private SpriteRenderer sprite;
@@ -81,6 +82,7 @@ public class Character : MonoBehaviour
 
     private IEnumerator Die()
     {
+        MenuMusic.Instance.CallFadeOut(GetComponent<AudioSource>());
         StartCoroutine(Shake(.7f, .05f));
         SoundManager.Instance.Play(GameManager.Instance.deathSound.sound, transform.parent.parent.parent, transform.position, GameManager.Instance.deathSound.volume, 0, false);
         if (EventManager.Instance.OnDeath != null)
