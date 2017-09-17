@@ -30,11 +30,11 @@ public class ObstacleMovement : MonoBehaviour
         float tempX;
         if (GameManager.Instance.LastXPos > 0)
         {
-            tempX = Random.Range(-2.3f, 0f);
+            tempX = Random.Range(-2.3f, -0.2f);
         }
         else
         {
-            tempX = Random.Range(0f, 2.3f);
+            tempX = Random.Range(0.2f, 2.3f);
         }
         GameManager.Instance.LastXPos = tempX;
         transform.position = new Vector3(tempX, 5.5f, 0);

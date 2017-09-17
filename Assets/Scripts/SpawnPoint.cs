@@ -9,7 +9,7 @@ public class SpawnPoint : MonoBehaviour
     void OnEnable()
     {
         int temp = Random.Range(0, 100);
-        if (temp < 5)
+        if (temp < 3)
         {
             Instantiate(teleportPowerup, transform.position, Quaternion.identity, transform);
         }
